@@ -1,0 +1,18 @@
+{
+  "tube": {
+    "size" : "15,24 cm x 15,24 cm x 96,52 cm",
+    "max_weight" : "10kg"
+  },
+  "box" : {
+    "size" : "29,21 cm x 6,03 cm x 33,66 cm",
+    "max_weight" : "15kg"
+  },
+  "pack" : {
+    "size" : "30,48 cm x 39,37 cm ",
+    "mx_weight" : "20kg"
+  },
+  "envelope" : {
+    "size": "24,13 cm x 39,37 cm ",
+    "max_weight" : "25kg"
+  }
+}

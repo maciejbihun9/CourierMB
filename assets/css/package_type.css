@@ -1,0 +1,59 @@
+#packages_area {
+    text-align: center
+}
+
+#packages_area img{
+    width: 30%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#packages_area img:hover {
+    background-color: white;
+}
+
+#selected_pkg {
+    height: auto;
+    width: 90%;
+    vertical-align: top;
+}
+
+#selected_package_type {
+    position: relative;
+    vertical-align: bottom;
+    overflow-wrap: break-word;
+    margin: 0;
+    outline-color: red;
+    direction: ltr;
+    display: block;
+}
+
+@media (max-width: 640px) {
+    #selected_pkg_img {
+        width: 100%;
+        text-align: center;
+    }
+
+
+}
+
+@media (min-width: 640px) {
+    #selected_pkg_img {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 256px;
+        text-align: center;
+    }
+
+    #selected_pkg_details {
+        width: 50%;
+        padding-left: 50%;
+    }
+}
+
+/* bid and deliverence section*/
+
+.date-and-hour-section {
+
+}

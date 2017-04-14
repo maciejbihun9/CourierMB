@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/address_data.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+{% endblock %}
+
+<!-- 16.51 -->
+{% block content %}
+    <div style="width: 100%;">
+       <div id="send_receive_form_cont">
+           <form id="send_receive_address_form" action="" method="post">
+                {% csrf_token %}
+               <div id="sender_form_cont">
+                   <h1>Sender address</h1>
+                    {{ senderForm.as_p }}
+               </div>
+               <div id="receiver_form_cont">
+                   <h1>Receiver address</h1>
+                    {{ receiverForm.as_p }}
+               </div>
+               <div style="text-align: center;">
+                    <input id="address_btn" class="button" type="submit" value="Continue">
+               </div>
+            </form>
+       </div>
+    </div>
+{% endblock %}

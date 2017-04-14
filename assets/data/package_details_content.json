@@ -1,0 +1,10 @@
+{
+  "package_type" : {
+    "content" : "<div id="packages_area" >
+            <h1>Pick your package</h1>
+            <img src="{% static 'images/package_1.png' %}" alt="Package 1" onclick="show_package_details('package_1.png')"/>
+            <img src="{% static 'images/package_2.png' %}" alt="Package 2" onclick="show_package_details('package_2.png')"/>
+            <img src="{% static 'images/package_3.png' %}" alt="Package 3" onclick="show_package_details('package_3.png')"/>
+        </div>"
+  }
+}

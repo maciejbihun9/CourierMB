@@ -1,0 +1,40 @@
+
+
+#container {
+    width: 100%;
+    height: 600px;
+    background-color: #87CEFA;
+}
+
+#start_plane {
+    width: 70%;
+}
+
+#start_plane_cont {
+    left: 5%;
+    top: 15%;
+}
+
+#start_text_cont {
+    font-size: 42px;
+    font-family: Pacifico, cursive;
+    width: 50%;
+    right: 5%;
+    color: gray;
+}
+
+#start_btn_cont {
+    left: 50%;
+    top: 70%;
+    margin-left: -50px;
+}
+
+#start_btn {
+    width: 200px;
+    height: 100px;
+    color: white;
+    background-color: #ffcc5c;
+    border-radius: 5%;
+    font-size: 32px;
+    font-family: Pacifico, cursive;
+}

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="{% static 'js/drop_down_menu.js' %}"></script>
+{% endblock %}
+
+{% block title %}CourierMB{% endblock %}
+{% block content %}
+    <nav id="menu_nav">
+      <ul>
+        <li>
+          <a href="#">SEND</a>
+          <ul class="fallback">
+            <li><a href="{% url 'courier_mb:send_package_page' %}">send international package</a></li>
+            <li><a href="#">send local package</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">TRACK</a>
+          <ul class="fallback">
+            <li><a href="#">track your package</a></li>
+            <li><a href="#">track your package in country</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <p id="desc_element">Desc element</p>
+    <div id="test_div">
+        <p>this is a test div</p>
+    </div>
+{% endblock %}

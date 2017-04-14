@@ -1,0 +1,25 @@
+{% load static from staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+
+        <script src="{% static "js/jquery-1.8.0.min.js" %}"></script>
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        {% block static %}{% endblock %}
+    </head>
+    <body>
+        <div class="site-container" style="position: relative;">
+            <h1 id="logo">CourierMB</h1>
+            <nav id="layout_nav">
+                <a href="{% url 'courier_mb:home_page' %}">Home</a>
+                <a href="{% url 'courier_mb:my_profile' %}">My Profile</a>
+            </nav>
+            <div id="main_page_cont_id">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

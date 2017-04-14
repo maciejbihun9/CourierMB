@@ -1,0 +1,44 @@
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/signup_form.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div id="container" style="position: relative">
+        <div id="form_container" style="position: absolute;">
+            <div id="content_container" style="position: absolute;">
+                <div>
+                    <h1>CourierMB</h1>
+                </div>
+                <div>
+                    <h2>Create your account to send packages to places around the world</h2>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <form id="signup_form" action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    {% if  signup %}
+                    <!--this is signup form-->
+                        <input id="sbt_btn" type="submit" value="Sign up">
+                    {% else %}
+                    <!--this is login form-->
+                        <input id="sbt_btn" type="submit" value="Log in">
+                    {% endif %}
+                </form>
+                {% if signup %}
+                    <div>
+                        <p>You already have account? <a href="{% url 'courier_mb:log_in_form' %} "/>Log in</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

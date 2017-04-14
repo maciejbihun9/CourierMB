@@ -1,0 +1,55 @@
+#address_data_form_id {
+  width: 40%;
+}
+
+p {
+  width: 100%;
+}
+
+p input {
+  display: block;
+}
+
+#address_btn {
+  margin-top: 32px;
+}
+
+@media screen and (min-width: 640px) {
+
+  input {
+   width: 90%;
+  }
+
+   #sender_form_cont {
+    float: left;
+    width: 50%;
+   }
+
+   #receiver_form_cont {
+    float: right;
+    width: 50%;
+   }
+
+
+}
+
+@media screen and (max-width: 640px) {
+
+   input {
+   width: 100%;
+   }
+
+
+    #receiver_form_cont {
+        display: block;
+    }
+
+  #sender_form_cont {
+    width: 100%;
+   }
+
+   #receiver_form_cont {
+    width: 100%;
+   }
+
+}

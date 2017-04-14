@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/start.css' %}">
+{% endblock %}
+
+{% block title %}CourierMB{% endblock %}
+
+{% block content %}
+    <div id="container" style="position: relative;">
+        <div id="start_plane_cont" style="position: absolute;">
+           <img id="start_plane" src="{% static 'images/plane.png' %}" alt="plane">
+        </div>
+        <div id="start_text_cont" style="position: absolute;">
+            <p id="start_text">Send your packages any time you want,
+                anywhere you want,
+                for the lowest prices
+                on the market with CourierMB.
+            </p>
+        </div>
+        <div id="start_btn_cont" style="position: absolute;">
+            <form action="{% url 'courier_mb:sign_up_form' %}" method="get">
+                <input id="start_btn" type="submit" value="START" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
