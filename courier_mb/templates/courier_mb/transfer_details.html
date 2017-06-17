@@ -1,0 +1,238 @@
+{% extends "courier_mb/layout.html" %}
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/transfer_details.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <script src="{% static 'js/transfer_details.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+
+{% endblock %}
+
+<!-- 16.51 -->
+{% block content %}
+    <div style="width: 100%">
+        <ul style="list-style-type: none;">
+            <li id="addressArea">
+                <div id="addressHeader" class="accordionHead">
+                    <span>1.</span>
+                    <span>  </span>
+                    Address details
+                </div>
+                <div id="addressSection" style="width: 100%; display: unset;">
+                   <div id="send_receive_form_cont">
+                       <form id="send_receive_address_form" action="" method="post">
+                            {% csrf_token %}
+                           <div id="sender_form_cont">
+                               <h1>Sender address</h1>
+                                {{ senderForm.as_p }}
+                           </div>
+                           <div id="receiver_form_cont">
+                               <h1>Receiver address</h1>
+                                {{ receiverForm.as_p }}
+                           </div>
+                       </form>
+                       <div style="text-align: center;">
+                           <input id="addressBtn" class="button" type="submit" value="Continue" onclick="show_package_type_section()">
+                       </div>
+                   </div>
+                </div>
+            </li>
+            <li id="packageTypeArea" >
+                <div id="packageTypeHeader" class="accordionHead">
+                    <span>2.</span>
+                    <span> </span>
+                    Package Type
+                </div>
+                <div id="packageTypeSection" style="display: none;">
+                    <h1>Pick your package</h1>
+                    <fieldset style="height: 160px;">
+                        <div style="display: table;">
+                            <div style="width: 33%; float: left;">
+                                <div class="img_section">
+                                    <img src="{% static 'images/package_1.png' %}" alt="SMALL" onclick="handle_package_type('package_1.png', this.alt)"/>
+                                    <h3>CourierMB 10kg Box</h3>
+                                </div>
+                            </div>
+                            <div style="width: 33%; float: left;">
+                                <div class="img_section">
+                                    <img src="{% static 'images/package_2.png' %}" alt="MEDIUM" onclick="handle_package_type('package_2.png', this.alt)"/>
+                                    <h3>CourierMB 25kg Box</h3>
+                                </div>
+                            </div>
+                            <div style="width: 33%; float: left;">
+                                <div class="img_section">
+                                    <img src="{% static 'images/package_3.png' %}" alt="LARGE" onclick="handle_package_type('package_3.png', this.alt)"/>
+                                    <h3>your choice</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </li>
+            <li id="selectedPackageTypeArea" >
+                <div id="selectedPackageTypeHeader" class="accordionHead">
+                    <span>3.</span>
+                    <span> </span>
+                    Package details
+                </div>
+                <div id="selectedPackageTypeSection" style="display: none;">
+                    <div id="selectedPkgImg" style="z-index: 5;">
+                        <h1>Pick your options</h1>
+                         <hr>
+                        <img id="selectedPkg" src="" alt="Package"/>
+                         <hr>
+                        <button class="button" onclick="go_to_previous_page(this)" >Change type</button>
+                    </div>
+                    <div id="selectedPkgDetails">
+                        <div>
+                            <h1>Package name</h1>
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 id="packageSize">Package size</h2>
+                        </div>
+                        <div>
+                            <h1>Package details</h1>
+                        </div>
+                        <hr>
+                        <div>
+                            <h3 style="display: inline-block; width: 40%;">Package weight: </h3><input id="pack_weight_input" style="width: 50%;" type="text" />
+                        </div>
+                        <div>
+                            <h3 style="display: inline-block; width: 40%;">Package contents: </h3><input id="pack_contents_input" style="width: 50%;" type="text" />
+                        </div>
+                        <div>
+                            <h3 style="display: inline-block; width: 40%;">Package post airport: </h3>
+                            <!--<input id="post_airport_input" style="width: 50%;" type="text" />-->
+                             <select onchange="on_change_post()" id="post_airport_select">
+                                 <option value=""></option>
+                                 <option value="Wroclaw">Wroclaw</option>
+                                 <option value="Warsaw">Warsaw</option>
+                                 <option value="Madrit">Madrit</option>
+                                 <option value="Rome">Rome</option>
+                                 <option value="Dublin">Dublin</option>
+                                 <option value="Moscow">Moscow</option>
+                                 <option value="Paris">Paris</option>
+                                 <option value="Berlin">Berlin</option>
+                                 <option value="Stockholm">Stockholm</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 style="display: inline-block; width: 40%;">Package dest airport: </h3>
+                            <select onchange="on_change_dest()" id="dest_airport_select">
+                                 <option value=""></option>
+                                 <option value="Wroclaw">Wroclaw</option>
+                                 <option value="Warsaw">Warsaw</option>
+                                 <option value="Madrit">Madrit</option>
+                                 <option value="Rome">Rome</option>
+                                 <option value="Dublin">Dublin</option>
+                                 <option value="Moscow">Moscow</option>
+                                 <option value="Paris">Paris</option>
+                                 <option value="Berlin">Berlin</option>
+                                 <option value="Stockholm">Stockholm</option>
+                            </select>
+                        </div>
+                        <div>
+                             <table id="price_section">
+                              <tr>
+                                <td><button class="button" onclick="check_price()">Check price</button></td>
+                                <td><label id="price_label">0.0</label></td>
+                              </tr>
+                            </table>
+                        </div>
+                        {% comment %}<div>
+                            <button onclick="show_duty_section()">Continue</button>
+                        </div>{% endcomment %}
+                    </div>
+                    <div id="selectedPackageDeliverDate">
+                        <h1>Pick date and deliver price</h1>
+                        <hr>
+                        <script>
+                            $(function() {
+                             $( '#datepicker' ).datepicker();
+                             $('#ui-datepicker-div').css("background-color", "lightgray")
+                             });
+                        </script>
+                        <h2 style="width: 30%; display: inline-block;">send date: </h2>
+                        <input style="width: 60%; display: inline-block;" type="text" id="datepicker">
+                        <h2>deliver date: </h2>
+                    </div>
+                    <div style="text-align: center;">
+                        <input id="packageDetailsBtn" class="button" type="submit" value="Continue" onclick="show_duty_section()">
+                    </div>
+                </div>
+            </li>
+            <li id="dutyArea" >
+                <div id="dutyHeader" class="accordionHead">
+                    <span>4.</span>
+                    <span> </span>
+                    Duty information
+                </div>
+                 <div id="dutySection" style="display: none;">
+                    <div>
+                        <h1>Opisz zawartość przesyłki do odprawy celnej.</h1>
+                    </div>
+                    <div>
+                        <h2>Informacje te pozwalają usprawnić odprawę celną przesyłki.</h2>
+                    </div>
+                    <hr>
+                    <div style="background-color: lightgray;">
+                        <h1>Products</h1>
+                        <p>Produkty to towary i przedmioty do użytku własnego i komercyjnego.</p>
+                        <select>
+                             <option value="trade">trade</option>
+                             <option value="gift">gift</option>
+                             <option value="sample">sample</option>
+                             <option value="stuff">personal stuff</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="button" onclick="go_to_previous_page(this)">change package type</button>
+                    </div>
+                     <div style="text-align: center;">
+                        <input class="button" value="Continue" onclick="show_payment_section()">
+                    </div>
+                </div>
+            </li>
+            <li id="paymentArea">
+                <div id="paymentHeader" class="accordionHead">
+                    <span>5.</span>
+                    <span> </span>
+                    Payment
+                </div>
+                <div id="paymentSection" style="display: none;">
+                    <div>
+                        <p>This is a biling area</p>
+                    </div>
+                    <div>
+                        <button class="button" onclick="go_to_previous_page(this)">change duty info</button>
+                    </div>
+                    <div>
+                        <button class="button" onclick="show_conf_section()">Continue</button>
+                    </div>
+                </div>
+            </li>
+            <li id="confirmationArea">
+                <div id="confirmationHeader" class="accordionHead">
+                    <span>6.</span>
+                    <span> </span>
+                    Confirmation
+                </div>
+                <div id="confirmationSection" style="display: none;">
+                    <div>
+                        <p>This is a conf area</p>
+                    </div>
+                    <div>
+                        <button class="button" onclick="go_to_previous_page(this)">change your payment details</button>
+                    </div>
+                    <div>
+                        <button class="button" onclick="save_package()">Save Package</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {{ clean_data }}
+{% endblock %}

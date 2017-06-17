@@ -1,21 +1,38 @@
 from django.shortcuts import render
 
+from django.http import HttpResponse
 from django.shortcuts import  render
 from django.contrib import messages
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from .forms import SignUpForm, LoginForm, SenderForm, ReceiverForm
 from django.shortcuts import redirect
 from courier_mb.utils import Utils
+from django.contrib.auth.decorators import login_required
 
+
+@login_required()
 def get_home_page(request):
-    return render(request, 'home.html')
+    return render(request, 'courier_mb/home.html')
 
+
+@login_required()
+def get_admin_panel(request):
+    if request.user.is_superuser:
+        return render(request, 'courier_mb/admin_panel.html')
+    else:
+        status_code = 403
+        return HttpResponse("Status code returned: {} .You are not allowed to see this page. Contact with service admin".format(str(status_code)), status=status_code)
+
+
+
+@login_required()
 def get_my_profile(request):
-    return render(request, 'my_profile.html')
+    return render(request, 'courier_mb/my_profile.html')
+
 
 def get_signup_form(request):
     # if this is a POST request we need to process the form data
@@ -38,7 +55,8 @@ def get_signup_form(request):
     else:
         form = SignUpForm()
 
-    return render(request, 'sgn_log_form.html', {'form': form, 'signup': True})
+    return render(request, 'courier_mb/sgn_log_form.html', {'form': form, 'signup': True})
+
 
 def get_login_form(request):
     # static variables
@@ -51,6 +69,7 @@ def get_login_form(request):
         if form.is_valid():
             user = authenticate(username=form.cleaned_data['your_username'], password=form.cleaned_data['password'])
             if user is not None:
+                login(request, user)
                 return HttpResponseRedirect('/courierMB/home')
             else:
                 messages.add_message(request, messages.INFO, no_user_message)
@@ -59,9 +78,15 @@ def get_login_form(request):
     else:
         form = LoginForm()
 
-    return render(request, 'sgn_log_form.html', {'form': form, 'signup': False})
+    return render(request, 'courier_mb/sgn_log_form.html', {'form': form, 'signup': False})
 
 
+@login_required()
+def get_package_details_page(request):
+    return render(request, 'package_details_page.html')
+
+
+@login_required()
 def get_send_package_page(request):
     # check whether it's valid:
     if request.method == 'POST':
@@ -77,13 +102,11 @@ def get_send_package_page(request):
     else:
         senderForm = SenderForm()
         receiverForm = ReceiverForm()
-    return render(request, 'address_data_form.html', {'senderForm': senderForm, 'receiverForm': receiverForm})
+    return render(request, 'courier_mb/transfer_details.html', {'senderForm': senderForm, 'receiverForm': receiverForm})
 
 
+@login_required()
 def get_package_type_page(request, sender_data, receiver_data):
+    return render(request, 'courier_mb/transfer_details.html', {'sender_data': sender_data, 'receiver_data' : receiver_data})
 
-    return render(request, 'package_type_data.html', {'sender_data': sender_data, 'receiver_data' : receiver_data})
-
-def get_package_details_page(request):
-    return render(request, 'package_details_page.html')
 

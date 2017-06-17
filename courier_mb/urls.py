@@ -2,18 +2,29 @@
 from django.conf.urls import url
 from django.contrib import admin
 from . import views
+from . import actions
 from django.conf.urls import include
 from rest_framework import routers
+from django.contrib.auth import views as auth_views
 
 
 
 
 urlpatterns = [
-    url(r'^home/', views.get_home_page, name="home_page"),
-    url(r'^signup/', views.get_signup_form, name="sign_up_form"),
-    url(r'^send_inter_package/', views.get_send_package_page, name="send_package_page"),
-    url(r'^login/', views.get_login_form, name="login_form"),
-    url(r'^package_details/', views.get_package_details_page, name="package_details_page"),
-    url(r'^login/', views.get_login_form, name="log_in_form"),
-    url(r'^profile/', views.get_my_profile, name="my_profile"),
+
+    #actions
+    url(r'^actions/save_package/$', actions.save_package, name="save_package"),
+    url(r'^actions/run_computations/$', actions.run_computations, name="run_computations"),
+    url(r'^actions/get_airport/$', actions.get_airport, name="get_airport"),
+    url(r'^actions/logout/$',actions.logout_action, name="logout"),
+    url(r'^actions/init_database/$',actions.init_database, name="init_database"),
+
+    #views
+    url(r'^home/$', views.get_home_page, name="home_page"),
+    url(r'^package_details/$', views.get_package_details_page, name="package_details_page"),
+    url(r'^profile/$', views.get_my_profile, name="my_profile"),
+    url(r'^login/$', views.get_login_form, name="login_form"),
+    url(r'^admin_panel/$', views.get_admin_panel, name="admin_panel"),
+    url(r'^signup/$', views.get_signup_form, name="sign_up_form"),
+    url(r'^send_inter_package/$', views.get_send_package_page, name="send_package_page"),
 ]

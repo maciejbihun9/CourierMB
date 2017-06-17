@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "courier_mb/layout.html" %}
 
 {% load static from staticfiles %}
 
@@ -21,7 +21,7 @@
             </p>
         </div>
         <div id="start_btn_cont" style="position: absolute;">
-            <form action="{% url 'courier_mb:sign_up_form' %}" method="get">
+            <form action="{% url 'courier_mb:login_form' %}" method="get">
                 <input id="start_btn" type="submit" value="START" />
             </form>
         </div>

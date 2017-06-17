@@ -1,0 +1,26 @@
+        wroclaw_port = Airport("Wroclaw", 51.107883, 17.038538, 750, 0, 225, 0.45, 0)
+        AirportContext.add_airport(wroclaw_port)
+
+        warsaw_port = Airport("Warsaw", 52.251762, 21.030741, 575, 186, 322, 0.489, 0)
+        AirportContext.add_airport(warsaw_port)
+
+        madrit_port = Airport("Madrit", 40.416775, -3.70,  932, 190, 322, 0.31, 0)
+        AirportContext.add_airport(madrit_port)
+
+        rome_port = Airport("Rome", 42.101799, 12.176142, 381, 48.3, 168, 0.34, 0)
+        AirportContext.add_airport(rome_port)
+
+        dublin_port = Airport("Dublin", 53.350140, -6.266155, 993, 0, 180, 0.34, 0)
+        AirportContext.add_airport(dublin_port)
+
+        moscow_port = Airport("Moscow", 55.752121, 37.617664, 1115, 0, 115, 0.63, 0)
+        AirportContext.add_airport(moscow_port)
+
+        paris_port = Airport("Paris", 48.858093, 2.294694, 740, 1000, 419, 0.21, 0)
+        AirportContext.add_airport(paris_port)
+
+        berlin_port = Airport("Berlin", 52.518623, 13.376198, 511, 125, 419, 0.26, 0)
+        AirportContext.add_airport(berlin_port)
+        # 2 free parking hours
+        stockholm_port = Airport("Stockholm", 59.334591, 18.063240, 360, 100, 188, 0.31, 0)
+        AirportContext.add_airport(stockholm_port)

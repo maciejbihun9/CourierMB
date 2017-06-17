@@ -19,6 +19,7 @@ from django.contrib import admin
 
 from . import views
 
+
 urlpatterns = [
     url(r'^courierMB/', include('courier_mb.urls', namespace='courier_mb')),
     url(r'^start/', views.start_page),

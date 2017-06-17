@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        'DIRS': ['templates',],
+        'DIRS': ['templates', 'courier_mb/templates/courier_mb'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +86,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'courierdb',
+        'NAME': 'courier_mb',
         'USER': 'maciek1',
         'PASSWORD': 'maciek1',
         'HOST': '127.0.0.1',
@@ -135,6 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+LOGIN_URL = '/courierMB/login/?next=/courierMB/home/'

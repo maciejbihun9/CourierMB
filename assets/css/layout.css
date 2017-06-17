@@ -3,6 +3,8 @@ html {
     padding: 0;
 }
 
+
+
 body {
     margin: 0;
     padding: 0;
@@ -11,14 +13,19 @@ body {
 ul {
     padding: 0;
     margin: 0;
+    list-style-type: none;
 }
 
 h1 {
-    color: lightgray;
+    color: rgb(77, 20, 140);
 }
 
 h2 {
-    color: lightgray;
+    color: gray;
+}
+
+h3 {
+    color: gray;
 }
 
 .button {
@@ -68,4 +75,36 @@ h2 {
   background-color: gray;
   color: white;
   border:none;
+}
+
+/* calendar properties*/
+
+td {
+    background-color: white;
+    border-radius: 2px;
+}
+
+td a {
+    text-decoration: none;
+    color: gray;
+}
+
+th span {
+    color: whitesmoke;
+}
+
+.ui-datepicker-header a {
+    color: gray;
+    margin-right: 60%;
+    cursor: grab;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+}
+
+.ui-datepicker-title span {
+    font-size: 18px;
+    color: white;
+
 }

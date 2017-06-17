@@ -35,7 +35,11 @@
                 </form>
                 {% if signup %}
                     <div>
-                        <p>You already have account? <a href="{% url 'courier_mb:log_in_form' %} "/>Log in</p>
+                        <p>You already have account? <a href="{% url 'courier_mb:login_form' %} "/>Log in</p>
+                    </div>
+                {% elif not signup %}
+                    <div>
+                        <p>Not a member yet? Sign up <a href="{% url 'courier_mb:sign_up_form' %} "/>Sign up</p>
                     </div>
                 {% endif %}
             </div>

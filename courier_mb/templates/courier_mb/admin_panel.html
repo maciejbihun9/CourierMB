@@ -1,0 +1,43 @@
+{% extends "courier_mb/layout.html" %}
+{% load static from staticfiles %}
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/address_data.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <script src="{% static 'js/admin_panel.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="admin_panel_area">
+    <div id="admin_panel_run_section" style="z-index: 5;">
+        <h1>Run algorithm</h1>
+        <hr>
+        <button class="button" onclick="run_algorithm()">RUN ALGORITHM</button>
+        <button class="button" onclick="init_database()">INIT DATABASE</button>
+    </div>
+    <div id="admin_panel_results_section">
+        <div>
+            <h1>Results section</h1>
+        </div>
+        <hr>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Price for tour: </h3><label id="admin_panel_price_for_tour">Waiting...</label>
+        </div>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Earnings from packages: </h3><label id="admin_panel_earnings_from_packages">Waiting...</label>
+        </div>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Total earnings: </h3><label id="admin_panel_total_earnings">Waiting...</label>
+        </div>
+        <div>
+            <h1>Final tour results</h1>
+        </div>
+        <hr>
+        <div>
+            <h2>results section</h2>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

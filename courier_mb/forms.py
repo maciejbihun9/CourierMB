@@ -1,27 +1,28 @@
 from django import forms
 
+
 class SignUpForm(forms.Form):
-    your_name_surname = forms.CharField(label= "", initial='Name & Surname', max_length=15)
-    your_username = forms.CharField(label= "", initial='Username', max_length=10)
-    email = forms.EmailField(label= "", initial='email', max_length=20)
-    password = forms.CharField(label= "", initial='password', max_length=10, widget=forms.PasswordInput)
-    repeat_password = forms.CharField(label= "", initial='repeat password', max_length=10, widget=forms.PasswordInput)
+    your_name_surname = forms.CharField(label= "", widget=forms.TextInput(attrs={'placeholder': 'Name & Surname'}), max_length=15)
+    your_username = forms.CharField(label= "", widget=forms.TextInput(attrs={'placeholder': 'Username'}), max_length=10)
+    email = forms.EmailField(label= "", widget=forms.EmailInput(attrs={'placeholder': 'Email'}), max_length=20)
+    password = forms.CharField(label= "", widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), max_length=10)
+    repeat_password = forms.CharField(label= "", widget=forms.PasswordInput(attrs={'placeholder': 'Repeat password'}), max_length=10)
 
     def clean(self):
         cleaned_data = super().clean()
-        password1 = cleaned_data.get('password')
-        password2 = cleaned_data.get('repeat_password')
+        password = cleaned_data.get('password')
+        repeat_password = cleaned_data.get('repeat_password')
 
-        if password1 and password1 != password2:
+        if password and password != repeat_password:
             msg = "password does not match"
             self.add_error('repeat_password', msg)
-            # raise forms.ValidationError("Passwords don't match")
-
         return self.cleaned_data
 
+
 class LoginForm(forms.Form):
-    your_username = forms.CharField(label= "", initial='Username', max_length=10)
-    password = forms.CharField(label= "", initial='password', max_length=10, widget=forms.PasswordInput)
+    your_username = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Username'}), max_length=10)
+    password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), max_length=10)
+
     def clean(self):
         return super().clean()
 
