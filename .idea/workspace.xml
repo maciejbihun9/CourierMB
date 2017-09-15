@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="730faaf0-0b39-4e84-8dc6-25b1d0cc2ee7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/images/home_photo.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/model/package_status.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/courier_mb/mb_message.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CourierMB/settings.py" afterPath="$PROJECT_DIR$/CourierMB/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/admin_panel.css" afterPath="$PROJECT_DIR$/assets/css/admin_panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/home.css" afterPath="$PROJECT_DIR$/assets/css/home.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/layout.css" afterPath="$PROJECT_DIR$/assets/css/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/transfer_details.css" afterPath="$PROJECT_DIR$/assets/css/transfer_details.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/admin_panel.js" afterPath="$PROJECT_DIR$/assets/js/admin_panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/__init__.py" afterPath="$PROJECT_DIR$/courier_mb/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/actions.py" afterPath="$PROJECT_DIR$/courier_mb/actions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/controller/airports_context.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/controller/airports_context.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/controller/package_creator.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/controller/package_creator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/model/aircraft.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/model/aircraft.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/model/flight.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/model/flight.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/run.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/run.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/air_fracht_algo/utils/utils.py" afterPath="$PROJECT_DIR$/courier_mb/air_fracht_algo/utils/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/models.py" afterPath="$PROJECT_DIR$/courier_mb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/templates/courier_mb/admin_panel.html" afterPath="$PROJECT_DIR$/courier_mb/templates/courier_mb/admin_panel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/templates/courier_mb/home.html" afterPath="$PROJECT_DIR$/courier_mb/templates/courier_mb/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/templates/courier_mb/transfer_details.html" afterPath="$PROJECT_DIR$/courier_mb/templates/courier_mb/transfer_details.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/urls.py" afterPath="$PROJECT_DIR$/courier_mb/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courier_mb/views.py" afterPath="$PROJECT_DIR$/courier_mb/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -574,6 +551,14 @@
       <option name="presentableId" value="Default" />
       <updated>1489861331536</updated>
     </task>
+    <task id="LOCAL-00001" summary="last">
+      <created>1505477990462</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1505477990462</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -625,6 +610,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="last" />
+    <option name="LAST_COMMIT_MESSAGE" value="last" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -927,6 +916,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="22" column="85" lean-forward="false" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
