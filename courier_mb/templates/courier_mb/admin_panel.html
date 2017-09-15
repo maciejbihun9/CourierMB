@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block static %}
-    <link rel="stylesheet" href="{% static 'css/address_data.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_panel.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <script src="{% static 'js/admin_panel.js' %}"></script>
     <script src="{% static 'js/ajax.js' %}"></script>
@@ -11,10 +11,29 @@
 {% block content %}
 <div id="admin_panel_area">
     <div id="admin_panel_run_section" style="z-index: 5;">
+        <h1>Database section</h1>
+        <hr>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Packages in database: </h3><label id="admin_panel_packages_status">{{ database_status }}</label>
+        </div>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Add packages: </h3><input style="width: 300px;" id="admin_panel_add_packages_input" type="text"/>
+        </div>
+        <button class="button" onclick="add_to_database()">Add packages</button>
+        <div>
+            <h3 style="display: inline-block; width: 40%;">Remove packages: </h3><input style="width: 300px;" id="admin_panel_remove_packages_input" type="text"/>
+        </div>
+        <div style="margin-bottom: 16px;">
+            <button class="button" onclick="remove_packages()">Remove packages</button>
+        </div>
+        <div>
+            <button class="button" onclick="clear_database()">Clear database</button>
+        </div>
+    </div>
+    <div id="admin_panel_run_section" style="z-index: 5;">
         <h1>Run algorithm</h1>
         <hr>
         <button class="button" onclick="run_algorithm()">RUN ALGORITHM</button>
-        <button class="button" onclick="init_database()">INIT DATABASE</button>
     </div>
     <div id="admin_panel_results_section">
         <div>
@@ -22,20 +41,20 @@
         </div>
         <hr>
         <div>
-            <h3 style="display: inline-block; width: 40%;">Price for tour: </h3><label id="admin_panel_price_for_tour">Waiting...</label>
+            <h3 style="display: inline-block; width: 40%;">Price for tour: </h3><label id="admin_panel_price_for_tour">0</label>
         </div>
         <div>
-            <h3 style="display: inline-block; width: 40%;">Earnings from packages: </h3><label id="admin_panel_earnings_from_packages">Waiting...</label>
+            <h3 style="display: inline-block; width: 40%;">Earnings from packages: </h3><label id="admin_panel_earnings_from_packages">0</label>
         </div>
         <div>
-            <h3 style="display: inline-block; width: 40%;">Total earnings: </h3><label id="admin_panel_total_earnings">Waiting...</label>
+            <h3 style="display: inline-block; width: 40%;">Total earnings: </h3><label id="admin_panel_total_earnings">0</label>
         </div>
         <div>
             <h1>Final tour results</h1>
         </div>
         <hr>
         <div>
-            <h2>results section</h2>
+            <h2><label id="admin_panel_trip_order">Best trip order</label></h2>
         </div>
     </div>
 </div>

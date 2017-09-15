@@ -18,10 +18,6 @@
     color: lightgray;
 }
 
-p {
-    color: red;
-}
-
 /* Different approach */
  /* Dropdown Button */
 .btn_style {
@@ -74,6 +70,7 @@ p {
 }
 
 #menu_nav {
+    font-family: Pacifico;
     background:white;
     height: 50px;
     width: 100%;
@@ -95,10 +92,27 @@ p {
 #menu_nav ul {text-align:center; background-color: gray;}
 #menu_nav ul li {float:left;display:inline;}
 #menu_nav ul li:hover {background:#E6E6E6;}
-#menu_nav ul li a {display:block;padding:15px 25px;color:#444;}
+#menu_nav ul li a {display:block;padding:15px 25px;color:gray;}
 #menu_nav ul li ul {position:absolute;width:110px;background:#FFF;}
 #menu_nav ul li ul li {width:110px;}
 #menu_nav ul li ul li a {display:block;padding:15px 10px;color:#444;}
 #menu_nav ul li ul li:hover a {background:#F7F7F7;}
 #menu_nav ul li ul.fallback {display:none;}
 #menu_nav ul li:hover ul.fallback {display:block;}
+
+#home_info_section {
+    font-size: 18px;
+    font-family: cursive;
+    width: 100%;
+    right: 5%;
+    color: gray;
+    text-align: justify;
+}
+
+#home_offer_list {
+    list-style-type: circle;
+}
+
+#home_offer_list li {
+    margin-bottom: 16px;
+}

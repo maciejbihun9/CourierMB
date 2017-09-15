@@ -52,6 +52,12 @@ class Flight(object):
         """
         return self.dist
 
+    def get_post(self):
+        """
+        :return: Starting airport
+        """
+        return self.airport_start
+
     def get_flight_transport(self):
         return self.aircraft.get_magazine_status()
 

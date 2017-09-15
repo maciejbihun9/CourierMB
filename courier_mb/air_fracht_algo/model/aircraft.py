@@ -1,5 +1,6 @@
 from courier_mb.air_fracht_algo.enums.fuel_cons import FuelConsumption
 from courier_mb.models import Package
+from courier_mb.air_fracht_algo.controller.airports_context import AirportContext
 
 class Aircraft(object):
     """
@@ -18,7 +19,7 @@ class Aircraft(object):
         self.load_cap = load_cap
         self.avg_speed = avg_speed
         self.fuel_cons_level = fuel_cons_level
-        self.loaded_packages = []
+        self.number_of_packages = 0
         # counted in kilos
         self.total_packages_weight = 0
         self.packs_dest = {}
@@ -38,6 +39,13 @@ class Aircraft(object):
     def get_load_cap(self) -> float:
         return self.load_cap
 
+    def contains_packages_for_airport(self, airport) -> bool:
+        if self.packs_dest[airport.get_name()] != 0:
+            return True
+        else:
+            return False
+
+
     def load_package(self, package: Package) -> bool:
         new_pack_weight = package.get_weight()
         if self.total_packages_weight + new_pack_weight < self.load_cap:
@@ -45,8 +53,9 @@ class Aircraft(object):
                 self.packs_dest[package.get_dest().get_name()] = self.packs_dest[package.get_dest().get_name()] + 1
             else:
                 self.packs_dest[package.get_dest().get_name()] = 1
-            self.loaded_packages.append(package)
+            package.set_status(Package.LOADED)
             self.total_packages_weight += new_pack_weight
+            self.number_of_packages += 1
             return True
         else:
             return False
@@ -67,7 +76,11 @@ class Aircraft(object):
 
 
     def get_packages(self) -> list:
-        return self.loaded_packages
+        """
+        If package status from AirportContext is LOADED that means this package is on aircraft board
+        :return: Packages from airport context which status is LOADED
+        """
+        return [package for package in AirportContext.get_packages() if package.get_status() == Package.LOADED]
 
     def load_packages(self, airport):
         """
@@ -76,14 +89,11 @@ class Aircraft(object):
         :return: None
         """
         print("Packages loading...")
-        loaded_packs_from_airport = []
         for package in airport.get_packages():
-            loaded = self.load_package(package)
-            if loaded == False:
-                break
-            loaded_packs_from_airport.append(package)
-        # remove from airport loaded packages
-        airport.remove_packages(loaded_packs_from_airport)
+            if package.get_status() == Package.WAITING:
+                loaded = self.load_package(package)
+                if loaded == False:
+                    break
         print("Done loading...")
 
 
@@ -98,10 +108,14 @@ class Aircraft(object):
         for package in self.get_packages():
             if package.get_dest().get_name() == airport.get_name():
                 self.total_packages_weight -= package.get_weight()
-        self.loaded_packages = [pack for pack in self.get_packages() if pack.get_dest().get_name() != airport.get_name()]
+                package.set_status(Package.DELIVERED)
+                self.number_of_packages -= 1
         self.packs_dest[airport.get_name()] = 0
 
     def get_magazine_status(self):
+        """
+        :return: Dict with loaded packages number for each airport destination
+        """
         return self.packs_dest
 
     def clear_aircraft(self):
@@ -109,5 +123,8 @@ class Aircraft(object):
         Remove all transport from aircraft
         :return: None
         """
-        self.loaded_packages = []
+        for package in AirportContext.get_packages():
+            package.set_status(Package.WAITING)
 
+    def get_number_of_packages(self):
+        return self.number_of_packages

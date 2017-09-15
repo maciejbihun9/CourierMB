@@ -11,6 +11,9 @@ from django.core.urlresolvers import reverse
 from .forms import SignUpForm, LoginForm, SenderForm, ReceiverForm
 from django.shortcuts import redirect
 from courier_mb.utils import Utils
+from courier_mb.models import Airport
+from courier_mb.models import Package
+from courier_mb.air_fracht_algo.controller.airports_context import AirportContext
 from django.contrib.auth.decorators import login_required
 
 
@@ -22,12 +25,15 @@ def get_home_page(request):
 @login_required()
 def get_admin_panel(request):
     if request.user.is_superuser:
-        return render(request, 'courier_mb/admin_panel.html')
+
+        # init AirportContext with airports
+        airports = Airport.objects.all()
+        AirportContext.init_airports_context(airports)
+        num_of_packages_in_database = Package.objects.count()
+        return render(request, 'courier_mb/admin_panel.html', {"database_status" : num_of_packages_in_database})
     else:
         status_code = 403
         return HttpResponse("Status code returned: {} .You are not allowed to see this page. Contact with service admin".format(str(status_code)), status=status_code)
-
-
 
 @login_required()
 def get_my_profile(request):

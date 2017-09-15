@@ -3,7 +3,9 @@ html {
     padding: 0;
 }
 
-
+input {
+    border-style: solid;
+}
 
 body {
     margin: 0;

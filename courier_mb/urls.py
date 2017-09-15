@@ -18,6 +18,9 @@ urlpatterns = [
     url(r'^actions/get_airport/$', actions.get_airport, name="get_airport"),
     url(r'^actions/logout/$',actions.logout_action, name="logout"),
     url(r'^actions/init_database/$',actions.init_database, name="init_database"),
+    url(r'^actions/add_to_database/$', actions.add_to_database, name="add_to_database"),
+    url(r'^actions/clear_database/$', actions.clear_database, name="clear_database"),
+    url(r'^actions/remove_packages/$', actions.remove_packages, name="remove_packages"),
 
     #views
     url(r'^home/$', views.get_home_page, name="home_page"),

@@ -13,9 +13,9 @@ import copy
 class Run:
 
     @staticmethod
-    def run_algo(airports, packages):
-        # init context airports
-        AirportContext.init_airports_context(airports)
+    def run_algo(packages):
+        # init airports with packages
+        AirportContext.init_airports_with_packages(packages)
 
         # max payload - 27 000 kg, 3057 km
         # spalanie - 2.4l/ 100 km na każde 90kg
@@ -23,47 +23,34 @@ class Run:
         # fuel efficency: https://en.wikipedia.org/wiki/Fuel_economy_in_aircraft
         boeing_757 = Aircraft("boeing 757", 57840, 43000, 27000, 850, FuelConsumption.BOEING_757)
 
-        # get only one day packages
-        # load it
-        # create simulated annealing algorithm for that one day packages.
-        trip_cost = 0
-        # simulated annealing params
+        # simulated annealing procces stemp
         temp = 1000
 
+        # simulated annealing cooling rate
         cool_rate = 0.003
 
         # create init tour
         best_tour = None
-        """ num_of_packages = int(random.normal(10000, 3000, 1)[0])
-                    while num_of_packages < 5000 and num_of_packages > 15000:
-                        num_of_packages = int(random.normal(10000, 3000, 1)[0])
 
-                    packages = AirportContext.get_amount_of_packages(num_of_packages)
-                    AirportContext.init_airports_with_packages(packages)
-                    """
-        while temp > 200:
+        airports = AirportContext.get_airports()
+        start_airport = AirportContext.get_airports()[0]
+        while temp > 900:
             # generate random number of packages between given range
-            AirportContext.init_airports_with_packages(packages)
-            airports = AirportContext.get_airports()
-            start_airport = AirportContext.get_airports()[0]
             boeing_757.load_packages(start_airport)
             current_airport = start_airport
             total_trip_costs = 0
-
-            # create new tour
-            first_tour = None
-            # best_tour = None
             new_tour = Tour()
-            while AirportContext.airports_contain_packages():
-                # print("Packages to send status : {}".format(AirportContext.get_airports_status()))
-                # print("Aircraft status: {}".format(boeing_757.get_magazine_status()))
-                current_airport_dests = current_airport.get_airport_dests()
-                # get random dest point
+            # we travel until our aircraft contains packages
+            while boeing_757.get_number_of_packages():
                 rand_dest = randint(0, len(airports) - 1)
                 next_airport = airports[rand_dest]
-                while not next_airport.contain_packages():
-                    rand_dest = randint(0, len(airports) - 1)
-                    next_airport = airports[rand_dest]
+
+                # If we have airports that have packages to send...
+                if AirportContext.airports_contain_packages():
+                    # get airport that contains packages to send...
+                    while not next_airport.contain_packages() or next_airport.get_name() == current_airport.get_name():
+                        rand_dest = randint(0, len(airports) - 1)
+                        next_airport = airports[rand_dest]
                 # create flight for those two cities
                 flight = Flight(boeing_757, current_airport, next_airport)
                 new_tour.add_flight(flight)
@@ -75,14 +62,12 @@ class Run:
                 mag_status = boeing_757.get_magazine_status()
                 print("mag status : {}".format(mag_status))
                 # load destination packages from this airport
-                boeing_757.load_packages(next_airport)
+                if next_airport.contain_packages:
+                    boeing_757.load_packages(next_airport)
                 current_airport = next_airport
                 # print("start from {}".format(current_airport.get_name()))
 
-
-            airports_status = AirportContext.get_airports()
-            # after all packages has been delivered
-            # take one additional flight back to the base
+            AirportContext.reload_packages()
             back_to_the_base_flight = Flight(boeing_757, current_airport, start_airport)
             total_trip_costs += back_to_the_base_flight.get_flight_cost()
             new_tour.set_tour_cost(total_trip_costs)
@@ -100,16 +85,14 @@ class Run:
             temp -= temp * cool_rate
             print("current temp : {}".format(temp))
             print("Trip costs : {}".format(total_trip_costs))
-            print("Current best tour: {}".format(best_tour.get_tour_cost()))
+            print("Current best tour: {}".format(new_tour.get_tour_cost()))
 
         print(" THE ALGORITHM RESULTS ")
-        # print("first result number of flights taken : {}".format(first_tour.get_number_of_flights()))
-
         print("best result cost : {}".format(best_tour.get_tour_cost()))
-        print("first result number of flights taken : {}".format(best_tour.get_number_of_flights()))
+        print("best result number of flights taken : {}".format(best_tour.get_number_of_flights()))
 
         print("The best tour : {}".format(best_tour.get_tour_cost()))
-        return round(total_trip_costs, 2)
+        return best_tour
 
 
 

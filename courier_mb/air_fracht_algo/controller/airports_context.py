@@ -1,18 +1,17 @@
 
-from courier_mb.models import Airport
-# from courier_mb.air_fracht_algo.model.airport import Airport
 from courier_mb.air_fracht_algo.controller.package_creator import PackageCreator
 from courier_mb.air_fracht_algo.utils.utils import Utils
+from courier_mb.models import *
 from numpy import *
 
 # VERIFIED
 class AirportContext:
 
     airports = []
-    packages_to_send = 0
+    packages = []
 
     @staticmethod
-    def add_airport(airport: Airport):
+    def add_airport(airport):
         AirportContext.airports.append(airport)
 
     @staticmethod
@@ -37,7 +36,7 @@ class AirportContext:
     @staticmethod
     def init_airports_context(airports):
         """
-        Init context with default airports with their credentials
+        Init context with default airports with their attributes
         :return: None
         """
         for airport in airports:
@@ -57,13 +56,13 @@ class AirportContext:
         :param num_of_packages: Amount of packages to create
         :return: None
         """
+        AirportContext.packages = packages
         number_of_packages_fetched = 0
         for airport in AirportContext.airports:
             print("Delivered packages packages : {}".format(number_of_packages_fetched))
             for package in packages:
                 number_of_packages_fetched += 1
                 if airport.get_name() == package.get_post().get_name():
-                    AirportContext.packages_to_send += 1
                     airport.add_package(package)
 
     @staticmethod
@@ -86,12 +85,18 @@ class AirportContext:
     @staticmethod
     def get_airports_status() -> int:
         """
-        :return: How many packages to send left in all airports
+        :return: How many packages has status WAITING
         """
-        packages_to_send = 0
-        for airport in AirportContext.get_airports():
-            packages_to_send += len(airport.get_packages())
-        return packages_to_send
+        waiting = 0
+        for package in AirportContext.get_packages():
+            if package.get_status() == PackageStatus.WAITING:
+                waiting += 1
+        return waiting
+
+    @staticmethod
+    def reload_packages():
+        for package in AirportContext.get_packages():
+            package.set_status(PackageStatus.WAITING)
 
     @staticmethod
     def get_trip_price(packages: list):
@@ -106,11 +111,19 @@ class AirportContext:
         return prices
 
     @staticmethod
-    def get_airport_context_status():
-        """
-        :return: Number of packages for company left to send .
-        """
-        return AirportContext.packages_to_send
+    def init_algorithm_with_random_packages():
+        num_of_packages = int(random.normal(10000, 3000, 1)[0])
+        while num_of_packages < 5000 and num_of_packages > 15000:
+            num_of_packages = int(random.normal(10000, 3000, 1)[0])
+
+        packages = AirportContext.get_amount_of_packages(num_of_packages)
+        AirportContext.init_airports_with_packages(packages)
+
+    @staticmethod
+    def get_packages():
+        return AirportContext.packages
+
+
 
 
 

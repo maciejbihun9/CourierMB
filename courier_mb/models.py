@@ -1,8 +1,9 @@
 
 # Create your models here.
 from django.db import models
+from courier_mb.air_fracht_algo.model.package_status import PackageStatus
 from django.contrib.auth.models import User
-
+from courier_mb.air_fracht_algo.controller.airports_context import *
 """
         Airport details:
         * airport name,
@@ -105,7 +106,14 @@ class Airport(models.Model):
         return packages_weight
 
     def contain_packages(self):
-        return len(self.packages) != 0
+        """
+        If in airport context exists al least one package with status WAITING for this airport then return True
+        :return:
+        """
+        for package in AirportContext.get_packages():
+            if package.get_status() == Package.WAITING and package.get_post().get_name() == self.name:
+                return True
+        return False
 
     def get_packages(self):
         return self.packages
@@ -141,13 +149,13 @@ class Package(models.Model):
     contents = models.CharField(max_length=250)
     package_type = models.ForeignKey(PackageType)
 
-    DELIVERED = 'DE'
-    WAITING = 'WAIT'
-    ON_THE_WAY = 'OTW'
+    DELIVERED = PackageStatus.DELIVERED
+    WAITING = PackageStatus.WAITING
+    LOADED = PackageStatus.LOADED
     STATUSES = (
         (DELIVERED, 'Delivered'),
         (WAITING, 'Waiting'),
-        (ON_THE_WAY, 'On the way'),
+        (LOADED, 'Loaded'),
     )
     status = models.CharField(
         max_length=10,
@@ -158,9 +166,6 @@ class Package(models.Model):
     def get_status(self):
         return self.status
 
-    def is_upperclass(self):
-        return self.year_in_school in (self.JUNIOR, self.SENIOR)
-
     def get_dest(self) -> Airport:
         return self.dest_air_port
 
@@ -169,6 +174,9 @@ class Package(models.Model):
 
     def get_weight(self) -> float:
         return self.weight
+
+    def set_status(self, status):
+        self.status = status
 
 
 

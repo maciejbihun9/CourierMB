@@ -1,5 +1,5 @@
 from math import radians, cos, sin, asin, sqrt
-from courier_mb.models import Package
+from courier_mb.models import *
 
 class Utils:
 
@@ -25,7 +25,7 @@ class Utils:
                         airport_start.get_long(), airport_dest.get_long())
 
     @staticmethod
-    def compute_pack_price(package: Package):
+    def compute_pack_price(package):
         package_weight = package.get_weight()
         transport_dist = Utils.compute_dist(package.get_post(), package.get_dest())
         price = 11.24 * transport_dist + 2.39 * package_weight

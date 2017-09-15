@@ -1,5 +1,9 @@
 /*----------------Address details-----------------*/
 
+h1 {
+    font-family: Cursive;
+}
+
 #address_data_form_id {
   width: 40%;
 }

@@ -2,8 +2,7 @@ from random import randint
 
 from numpy import *
 
-from courier_mb.models import Package
-from courier_mb.models import PackageType
+import courier_mb.models
 
 
 # VERIFIED
@@ -29,12 +28,12 @@ class PackageCreator(object):
         rand_airport_dest = airports[randint(0, airports_size - 1)]
         rand_airport_post = airports[randint(0, airports_size - 1)]
         # be sure that post and dest airports are different
-        package_type = PackageType.objects.get(id=1)
+        package_type = courier_mb.models.PackageType.objects.get(id=1)
         while rand_airport_post.get_name() == rand_airport_dest.get_name():
             rand_airport_dest = airports[randint(0, airports_size - 1)]
             rand_airport_post = airports[randint(0, airports_size - 1)]
-        package = Package(weight = rand_weight, post_air_port = rand_airport_post, dest_air_port = rand_airport_dest,
-                          contents = "content", package_type = package_type, status=Package.WAITING)
+        package = courier_mb.models.Package(weight = rand_weight, post_air_port = rand_airport_post, dest_air_port = rand_airport_dest,
+                          contents = "content", package_type = package_type, status=courier_mb.models.Package.WAITING)
         return package
 
     @staticmethod
